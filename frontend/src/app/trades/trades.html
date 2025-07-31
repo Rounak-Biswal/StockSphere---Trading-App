@@ -1,0 +1,24 @@
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Symbol</th>
+            <th>Exchange</th>
+            <th>Currency</th>
+            <th>Type</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for(stock of allStockData; track stock._id){
+        <tr>
+            <td>{{ stock._id }}</td>
+            <td>{{ stock.symbol }}</td>
+            <td>{{ stock.meta.exchange }}</td>
+            <td>{{ stock.meta.currency }}</td>
+            <td>{{ stock.meta.type }}</td>
+            <td>{{ stock.trend }}</td>
+        </tr>
+        }
+    </tbody>
+</table>

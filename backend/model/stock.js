@@ -23,6 +23,7 @@ const stockSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    trend: String,
     meta: metaSchema,
     history: [dailyDataSchema]
 })
