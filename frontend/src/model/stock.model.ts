@@ -22,7 +22,8 @@ export interface IStock {
     stockName: string,
     sector: string,
     marketCap: number,
-    trend: string,
+    trend: number,
+    logoURL: string,
     meta: IMeta,
     history: IHistory[]
 }

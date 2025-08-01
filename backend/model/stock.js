@@ -19,16 +19,17 @@ const metaSchema = new mongoose.Schema({
 }, { _id: false });
 
 const stockSchema = new mongoose.Schema({
-    symbol: {
-        type: String,
-        required: true,
-    },
-    stockName: String,
-    sector: String,
-    marketCap: Number,
-    trend: String,
-    meta: metaSchema,
-    history: [dailyDataSchema]
+  symbol: {
+    type: String,
+    required: true,
+  },
+  stockName: String,
+  sector: String,
+  marketCap: Number,
+  trend: Number,
+  logoURL: String,
+  meta: metaSchema,
+  history: [dailyDataSchema]
 })
 
 const Stock = mongoose.model("Stock", stockSchema)

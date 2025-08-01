@@ -45,13 +45,38 @@ body {
         height: 100%;
 }
 
-table, thead, tbody, tr, th, td {
-  background-color: var(--black-primary) !important;
-  color: var(--silver-primary) !important;
-  border: none !important;
+td {
+        overflow: hidden;
 }
 
+table,
+tbody,
+tr,
+td {
+        background-color: var(--black-primary) !important;
+        color: var(--silver-primary) !important;
+        border: none !important;
+}
+
+thead,
+th {
+        background-color: var(--grey-primary) !important;
+        color: var(--silver-primary) !important;
+        border: none !important;
+}
+
+thead, th{
+        font-weight: 200 !important;
+        color: var(--silver-primary) !important;    
+}
+
+/* 
+table {
+        table-layout: fixed;
+        width: 100%;
+} */
+
 * {
-  scrollbar-width: thin;
-  scrollbar-color: var(--gray-700) var(--black-primary);
+        scrollbar-width: thin;
+        scrollbar-color: var(--gray-700) var(--black-primary);
 }
