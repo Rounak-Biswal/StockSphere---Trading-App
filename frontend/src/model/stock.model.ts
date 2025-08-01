@@ -19,6 +19,9 @@ export interface IMeta {
 export interface IStock {
     _id?: string,
     symbol: string,
+    stockName: string,
+    sector: string,
+    marketCap: number,
     trend: string,
     meta: IMeta,
     history: IHistory[]

@@ -1,24 +1,27 @@
-<table>
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Symbol</th>
-            <th>Exchange</th>
-            <th>Currency</th>
-            <th>Type</th>
-            <th>Status</th>
-        </tr>
+<div style="overflow-y: auto; overflow-x: auto; max-height: 100%;">
+  <table class="table table-borderless mb-0"
+    style="background-color: var(--black-primary); color: var(--silver-primary);">
+    <thead style="background-color: var(--black-primary); color: var(--silver-primary);">
+      <tr>
+        <th>Stock Name</th>
+        <th>Sector</th>
+        <th>Market Cap</th>
+        <th>Change</th>
+        <th>Price</th>
+        <th>Volume</th>
+      </tr>
     </thead>
-    <tbody>
-        @for(stock of allStockData; track stock._id){
-        <tr>
-            <td>{{ stock._id }}</td>
-            <td>{{ stock.symbol }}</td>
-            <td>{{ stock.meta.exchange }}</td>
-            <td>{{ stock.meta.currency }}</td>
-            <td>{{ stock.meta.type }}</td>
-            <td>{{ stock.trend }}</td>
-        </tr>
-        }
+    <tbody style="background-color: var(--black-primary); color: var(--silver-primary);">
+      @for(stock of allStockData; track stock._id){
+      <tr>
+        <td>{{stock.stockName}}</td>
+        <td>{{stock.sector}}</td>
+        <td>{{stock.marketCap}}</td>
+        <td>{{ stock.trend }}</td>
+        <td>{{ stock.history[0].close }}</td>
+        <td>{{ stock.history[0].volume }}</td>
+      </tr>
+      }
     </tbody>
-</table>
+  </table>
+</div>
