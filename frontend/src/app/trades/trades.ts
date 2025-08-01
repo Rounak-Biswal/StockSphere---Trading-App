@@ -12,15 +12,27 @@ import { CommonModule } from '@angular/common';
 export class Trades implements OnInit {
   http = inject(HttpClient)
   allStockData: IStock[] = []
+  watchlist: IStock[] = []
+  hoveredStock: IStock | null = null
 
   ngOnInit(): void {
     this.getData()
+    this.getWatchlistData()
   }
 
+  //get all stock data
   getData() {
     this.http.get("http://localhost:5000/stock/all")
       .subscribe((res: any) => {
         this.allStockData = res
+      })
+  }
+
+  //get all watchlist data
+  getWatchlistData() {
+    this.http.get("http://localhost:5000/watchlist/all")
+      .subscribe((res: any) => {
+        this.watchlist = res
       })
   }
 
@@ -48,7 +60,6 @@ export class Trades implements OnInit {
   }
 
   changeTrendColor(value: number) {
-    // let val = parseFloat(value)
     if (value < 0)
       return "text-center text-danger"
     else if (value > 0) {
@@ -57,5 +68,45 @@ export class Trades implements OnInit {
     else
       return "text-center text-warning"
   }
+  //------------------
 
+  //hovering actions & effects
+  addToHoveredStock(stock: IStock) {
+    this.hoveredStock = stock;
+  }
+
+  removeFromHoveredStock() {
+    this.hoveredStock = null;
+  }
+  //------------------------------
+
+  //watchlist management
+  addToWatchlist(stock: IStock) {
+    //if not starred, add to watchlist on click
+    if (!this.watchlist.some(s => s.symbol === stock.symbol)) {
+      this.http.post("http://localhost:5000/watchlist", stock).subscribe((res: any) => {
+        this.watchlist.push(res)
+      })
+    }
+    //if already starred, remove from watchlist on click
+    else {
+      this.http.delete(`http://localhost:5000/watchlist/${stock.symbol}`).subscribe(() => {
+        // this.watchlist = this.watchlist.filter(s => s.symbol !== stock.symbol)
+        // const index = this.watchlist.findIndex(s => s.symbol === stock.symbol)
+        // this.watchlist.splice(index, 1)
+
+        // this.watchlist = [...this.watchlist]
+      })
+    }
+  }
+
+  isInWatchlist(stock: IStock): boolean {
+    return this.watchlist.some(s => s.symbol === stock.symbol)
+  }
+  //--------------------------
+
+  val: boolean = true
+  btnClass(newVale: boolean) {
+    this.val = newVale
+  }
 }

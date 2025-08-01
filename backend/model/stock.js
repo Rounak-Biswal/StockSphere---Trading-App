@@ -33,4 +33,6 @@ const stockSchema = new mongoose.Schema({
 })
 
 const Stock = mongoose.model("Stock", stockSchema)
-module.exports = Stock;
+const Watchlist = mongoose.model("Watchlist", stockSchema)
+
+module.exports = {Stock, Watchlist};

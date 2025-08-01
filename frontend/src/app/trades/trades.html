@@ -1,14 +1,20 @@
 <div style="overflow-y: auto; overflow-x: auto; max-height: 100%;">
-  <table class="table table-borderless mb-0" style="background-color: var(--black-primary); color: var(--white-primary);">
+
+  <button (click)="btnClass(!val)" [ngClass]="val ? 'bg-success' : 'bg-danger'">
+    HELLO
+  </button>
+
+  <table class="table table-borderless mb-0"
+    style="background-color: var(--black-primary); color: var(--white-primary);">
 
     <colgroup>
-      <col style="width: 25%;"> <!-- Stock Name -->
-      <col style="width: 20%;"> <!-- Sector -->
-      <col style="width: 14%;"> <!-- Market Cap -->
-      <col style="width: 12%;"> <!-- Change -->
-      <col style="width: 13%;"> <!-- Price -->
-      <col style="width: 13%;"> <!-- Volume -->
-      <col style="width: 3%;"> <!-- + Icon -->
+      <col style="width: 25%;">
+      <col style="width: 20%;">
+      <col style="width: 14%;">
+      <col style="width: 12%;">
+      <col style="width: 13%;">
+      <col style="width: 13%;">
+      <col style="width: 3%;">
     </colgroup>
 
 
@@ -25,7 +31,7 @@
     </thead>
     <tbody style="background-color: var(--black-primary); color: var(--silver-primary);">
       @for(stock of allStockData; track stock._id){
-      <tr class="fw-bold">
+      <tr class="fw-bold" (mouseenter)="addToHoveredStock(stock)" (mouseleave)="removeFromHoveredStock()">
         @if(stock.symbol === "AAPL"){
         <td>
           <i class="fa-brands fa-apple"></i> &nbsp;
@@ -41,7 +47,18 @@
         <td [ngClass]="changeTrendColor(stock.trend)">{{ toPercent(stock.trend) }}%</td>
         <td class="text-center">${{ formatNumber(+stock.history[0].close) }}</td>
         <td class="text-center">{{ formatNumber(+stock.history[0].volume) }}</td>
-        <td><i class="fa-solid fa-plus"></i></td>
+        <td>
+          @if(isInWatchlist(stock)){
+          <i class="fa-solid fa-star" style="color: #ff8802; cursor: pointer;" (click)="addToWatchlist(stock)"></i>
+          }
+          @else if(hoveredStock && hoveredStock.symbol === stock.symbol){
+          <i class="fa-solid fa-star" style="color: #ff8802; cursor: pointer;" (click)="addToWatchlist(stock)"></i>
+          }
+          @else {
+          <i class="fa-solid fa-star" style="color: var(--grey-primary); cursor: pointer;"
+            (click)="addToWatchlist(stock)"></i>
+          }
+        </td>
       </tr>
       }
     </tbody>
