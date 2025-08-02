@@ -81,6 +81,27 @@ export class Trades implements OnInit {
   //------------------------------
 
   //watchlist management
+  getStarColor(stock: IStock): string {
+    if (this.isInWatchlist(stock)) return "#ff8802";   // gold
+    if (this.hoveredStock?.symbol === stock.symbol) return "#a3641d"; // gold on hover
+    return "var(--grey-primary)";                      // grey otherwise
+  }
+
+  toggleWatchlist(stock: IStock) {
+    const isInList = this.isInWatchlist(stock);
+
+    if (!isInList) {
+      this.http.post("http://localhost:5000/watchlist", stock).subscribe((res: any) => {
+        this.watchlist.push(res); // update local
+      });
+    } else {
+      this.http.delete(`http://localhost:5000/watchlist/${stock.symbol}`).subscribe(() => {
+        this.watchlist = this.watchlist.filter(s => s.symbol !== stock.symbol); // fix: use .symbol
+      });
+    }
+  }
+
+
   addToWatchlist(stock: IStock) {
     //if not starred, add to watchlist on click
     if (!this.watchlist.some(s => s.symbol === stock.symbol)) {
@@ -91,11 +112,7 @@ export class Trades implements OnInit {
     //if already starred, remove from watchlist on click
     else {
       this.http.delete(`http://localhost:5000/watchlist/${stock.symbol}`).subscribe(() => {
-        // this.watchlist = this.watchlist.filter(s => s.symbol !== stock.symbol)
-        // const index = this.watchlist.findIndex(s => s.symbol === stock.symbol)
-        // this.watchlist.splice(index, 1)
-
-        // this.watchlist = [...this.watchlist]
+        this.watchlist = this.watchlist.filter(s => s !== stock);
       })
     }
   }
@@ -104,9 +121,4 @@ export class Trades implements OnInit {
     return this.watchlist.some(s => s.symbol === stock.symbol)
   }
   //--------------------------
-
-  val: boolean = true
-  btnClass(newVale: boolean) {
-    this.val = newVale
-  }
 }

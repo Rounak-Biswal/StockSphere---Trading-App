@@ -1,9 +1,4 @@
 <div style="overflow-y: auto; overflow-x: auto; max-height: 100%;">
-
-  <button (click)="btnClass(!val)" [ngClass]="val ? 'bg-success' : 'bg-danger'">
-    HELLO
-  </button>
-
   <table class="table table-borderless mb-0"
     style="background-color: var(--black-primary); color: var(--white-primary);">
 
@@ -47,7 +42,7 @@
         <td [ngClass]="changeTrendColor(stock.trend)">{{ toPercent(stock.trend) }}%</td>
         <td class="text-center">${{ formatNumber(+stock.history[0].close) }}</td>
         <td class="text-center">{{ formatNumber(+stock.history[0].volume) }}</td>
-        <td>
+        <!-- <td>
           @if(isInWatchlist(stock)){
           <i class="fa-solid fa-star" style="color: #ff8802; cursor: pointer;" (click)="addToWatchlist(stock)"></i>
           }
@@ -58,7 +53,15 @@
           <i class="fa-solid fa-star" style="color: var(--grey-primary); cursor: pointer;"
             (click)="addToWatchlist(stock)"></i>
           }
+        </td> -->
+
+        <td>
+          <i class="fa-solid fa-star" [style.color]="getStarColor(stock)" style="cursor: pointer;"
+            (click)="toggleWatchlist(stock)" (mouseenter)="hoveredStock = stock" (mouseleave)="hoveredStock = null">
+          </i>
         </td>
+
+
       </tr>
       }
     </tbody>
