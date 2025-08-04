@@ -1,0 +1,34 @@
+<div class="watchlist card p-3 rounded-4 h-100 flex-fill overflow-auto p-2"
+    style="background-color: var(--grey-primary); color: var(--silver-primary);">
+    <h6 class="fw-bold mb-3">My Watchlist</h6>
+
+    @for(stock of watchlistData; track stock._id) {
+    <div class="watchlist-btn rounded-4 d-flex align-items-center justify-content-between py-2 border-bottom" style="gap: 10px;"
+        (click)="selectStockToDisplay(stock)">
+
+        <div class="d-flex align-items-center gap-2">
+            @if(stock.symbol === "AAPL") {
+            <i class="fa-brands fa-apple fs-5"></i>
+            }
+            @else {
+            <img [src]="stock.logoURL" width="24" height="24" style="border-radius: 50%;" />
+            }
+
+            <div>
+                <div class="fw-semibold" style="color: var(--silver-primary);">{{ stock.symbol }}</div>
+                <div class="text-muted small" style="color: var(--silver-secondary) !important">{{ stock.stockName }}
+                </div>
+            </div>
+        </div>
+
+        <div class="text-end">
+            <div class="fw-semibold" style="color: var(--gold-primary);">${{ formatNumber(+stock.history[0].close) }}
+            </div>
+            <div [ngClass]="changeTrendColor(stock.trend)" class="small">
+                {{ toPercent(stock.trend) }}%
+            </div>
+        </div>
+
+    </div>
+    }
+</div>

@@ -1,23 +1,23 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { IStock } from '../../model/stock.model';
 import { CommonModule } from '@angular/common';
-import { WatchlistOverview } from '../watchlist-overview/watchlist-overview';
-import { Chart } from '../chart/chart';
 
 @Component({
-  selector: 'app-dashboard',
-  imports: [HttpClientModule, CommonModule, WatchlistOverview, Chart],
-  templateUrl: './dashboard.html',
-  styleUrl: './dashboard.css'
+  selector: 'app-watchlist-overview',
+  imports: [HttpClientModule, CommonModule],
+  templateUrl: './watchlist-overview.html',
+  styleUrl: './watchlist-overview.css'
 })
-export class Dashboard implements OnInit {
+export class WatchlistOverview implements OnInit {
   http = inject(HttpClient)
 
-  selectedStock: IStock | null = null;
-  onStockSelection(stock: IStock) {
-    this.selectedStock = stock;
+  //send selected stock to parent(dashboard)
+  @Output() selectedStock = new EventEmitter<IStock>();
+  selectStockToDisplay(stock: IStock) {
+    this.selectedStock.emit(stock)
   }
+  //-------------------------------------------
 
   watchlistData: IStock[] = []
 

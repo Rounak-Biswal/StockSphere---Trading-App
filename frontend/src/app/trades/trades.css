@@ -1,0 +1,4 @@
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--gray-700) var(--black-primary);
+}

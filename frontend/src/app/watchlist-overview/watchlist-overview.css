@@ -1,0 +1,9 @@
+.watchlist-btn{
+    padding: 1rem;
+    transition: all 0.25s ease-in-out;
+}
+
+.watchlist-btn:hover {
+  background-color: var(--black-secondary);
+  cursor: pointer;
+}

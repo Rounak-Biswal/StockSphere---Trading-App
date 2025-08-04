@@ -1,0 +1,11 @@
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--black-primary) /*var(--grey-primary);*/ rgba(0,0,0,0)
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+}
