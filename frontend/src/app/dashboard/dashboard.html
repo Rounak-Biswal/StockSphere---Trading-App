@@ -1,1 +1,11 @@
-<p>dashboard works!</p>
+<div class="container d-flex gap-5 h-100 w-100" style="max-height: 100vh;">
+    <div class="chart bg-success w-75 h-100"></div>
+    <div class="overview d-flex flex-column gap-3 w-25 h-100">
+        <div class="watchlist bg-danger h-50 flex-fill">
+            @for(stock of watchlistData; track stock._id){
+            <div class="">{{stock.symbol}}</div>
+            }
+        </div>
+        <div class="extra bg-primary h-50 flex-fill"></div>
+    </div>
+</div>

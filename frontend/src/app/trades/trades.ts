@@ -91,19 +91,17 @@ export class Trades implements OnInit {
 
   toggleWatchlist(stock: IStock) {
     const isInList = this.isInWatchlist(stock);
-    console.log(isInList)
-
-
 
     if (!isInList) {
       this.http.post("http://localhost:5000/watchlist", stock).subscribe((res: any) => {
         this.watchlist.update(wl => [...wl, res]);
       });
-    } else
+    } else {
       this.watchlist.update(wl => wl.filter(s => s.symbol !== stock.symbol)); // 🔥 trigger update
-    this.http.delete(`http://localhost:5000/watchlist/${stock.symbol}`).subscribe(() => { });
+      this.http.delete(`http://localhost:5000/watchlist/${stock.symbol}`).subscribe(() => { });
+    }
+
   }
-  
 
   isInWatchlist(stock: IStock): boolean {
     return this.watchlist().some(s => s.symbol === stock.symbol);
