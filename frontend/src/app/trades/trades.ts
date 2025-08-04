@@ -2,6 +2,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, inject, OnInit } from '@angular/core';
 import { IStock } from '../../model/stock.model'
 import { CommonModule } from '@angular/common';
+import { signal, computed } from '@angular/core';
 
 @Component({
   selector: 'app-trades',
@@ -12,7 +13,7 @@ import { CommonModule } from '@angular/common';
 export class Trades implements OnInit {
   http = inject(HttpClient)
   allStockData: IStock[] = []
-  watchlist: IStock[] = []
+  watchlist = signal<IStock[]>([]);
   hoveredStock: IStock | null = null
 
   ngOnInit(): void {
@@ -32,7 +33,8 @@ export class Trades implements OnInit {
   getWatchlistData() {
     this.http.get("http://localhost:5000/watchlist/all")
       .subscribe((res: any) => {
-        this.watchlist = res
+        // this.watchlist = res
+        this.watchlist.set(res);
       })
   }
 
@@ -83,42 +85,28 @@ export class Trades implements OnInit {
   //watchlist management
   getStarColor(stock: IStock): string {
     if (this.isInWatchlist(stock)) return "#ff8802";   // gold
-    if (this.hoveredStock?.symbol === stock.symbol) return "#a3641d"; // gold on hover
-    return "var(--grey-primary)";                      // grey otherwise
+    if (this.hoveredStock?.symbol === stock.symbol) return "#be9e78ff"; // gold on hover
+    else return "var(--grey-primary)";                      // grey otherwise
   }
 
   toggleWatchlist(stock: IStock) {
     const isInList = this.isInWatchlist(stock);
+    console.log(isInList)
+
+
 
     if (!isInList) {
       this.http.post("http://localhost:5000/watchlist", stock).subscribe((res: any) => {
-        this.watchlist.push(res); // update local
+        this.watchlist.update(wl => [...wl, res]);
       });
-    } else {
-      this.http.delete(`http://localhost:5000/watchlist/${stock.symbol}`).subscribe(() => {
-        this.watchlist = this.watchlist.filter(s => s.symbol !== stock.symbol); // fix: use .symbol
-      });
-    }
+    } else
+      this.watchlist.update(wl => wl.filter(s => s.symbol !== stock.symbol)); // 🔥 trigger update
+    this.http.delete(`http://localhost:5000/watchlist/${stock.symbol}`).subscribe(() => { });
   }
-
-
-  addToWatchlist(stock: IStock) {
-    //if not starred, add to watchlist on click
-    if (!this.watchlist.some(s => s.symbol === stock.symbol)) {
-      this.http.post("http://localhost:5000/watchlist", stock).subscribe((res: any) => {
-        this.watchlist.push(res)
-      })
-    }
-    //if already starred, remove from watchlist on click
-    else {
-      this.http.delete(`http://localhost:5000/watchlist/${stock.symbol}`).subscribe(() => {
-        this.watchlist = this.watchlist.filter(s => s !== stock);
-      })
-    }
-  }
+  
 
   isInWatchlist(stock: IStock): boolean {
-    return this.watchlist.some(s => s.symbol === stock.symbol)
+    return this.watchlist().some(s => s.symbol === stock.symbol);
   }
   //--------------------------
 }
