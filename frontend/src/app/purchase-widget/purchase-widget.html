@@ -1,0 +1,67 @@
+<div class="card p-3 rounded-4 h-100 d-flex flex-column justify-content-between"
+    style="background-color: var(--grey-primary); color: var(--silver-primary);">
+
+    @if(stock){
+    <!-- Stock Info -->
+    <div class="d-flex align-items-center gap-3 mb-3">
+        <img [src]="stock.logoURL" width="36" height="36" style="border-radius: 50%;" />
+        <div>
+            <h6 class="mb-0 fw-bold">{{ stock.symbol }}</h6>
+            <small style="color: var(--silver-primary);">{{ stock.stockName }}</small>
+        </div>
+    </div>
+
+    <!-- Info Grid -->
+    <div class="mb-3">
+        <div class="row text-center">
+
+            <!-- Current Price -->
+            <div class="col-6">
+                <h6 class="mb-1" style="color: var(--silver-secondary);">Current Price</h6>
+                <h4 class="fw-bold" style="color: var(--gold-primary);">
+                    $ {{ formatNumber(+stock.history[0].close) }}
+                </h4>
+            </div>
+
+            <!-- Trend -->
+            <div class="col-6">
+                <h6 class="text-muted mb-1">&nbsp;</h6>
+                <h4 [ngClass]="stock.trend > 0 ? 'text-success' : 'text-danger'">
+                    {{ formatNumber(+stock.trend) }}%
+                </h4>
+            </div>
+
+            <!-- Available Balance label -->
+            <div class="col-6 mt-3">
+                <h6 class="mb-1" style="color: var(--silver-secondary);">Available Balance</h6>
+            </div>
+
+            <!-- Available Balance amount -->
+            <div class="col-6 mt-3">
+                <h4 class="fw-bold">$ 0.00</h4> <!-- replace with actual balance when available -->
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- Buy Action -->
+    <div class="mb-3">
+        <button class="btn rounded-3 w-100 mt-3 fw-bold" style="background-color: var(--green-secondary) !important;">
+            Buy {{ stock.symbol }}
+        </button>
+    </div>
+
+    <!-- Extra Info -->
+    <div class="small d-flex justify-content-between" style="color: var(--silver-secondary);">
+        <div><span style="color: var(--silver-secondary);">Last Close</span> <br> $ {{
+            formatNumber(+stock.history[0].close) }}</div>
+        <div><span style="color: var(--silver-secondary);">7D High</span> <br> $ {{ stock ?
+            formatNumber(+getHigh(stock)) : '-' }}</div>
+        <div><span style="color: var(--silver-secondary);">7D Low</span> <br> $ {{ stock ? formatNumber(+getLow(stock))
+            : '-' }}</div>
+    </div>
+    }
+</div>
+
+<span></span>

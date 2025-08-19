@@ -4,10 +4,11 @@ import { IStock } from '../../model/stock.model';
 import { CommonModule } from '@angular/common';
 import { WatchlistOverview } from '../watchlist-overview/watchlist-overview';
 import { Chart } from '../chart/chart';
+import { PurchaseWidget } from '../purchase-widget/purchase-widget';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [HttpClientModule, CommonModule, WatchlistOverview, Chart],
+  imports: [HttpClientModule, CommonModule, WatchlistOverview, Chart, PurchaseWidget],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css'
 })

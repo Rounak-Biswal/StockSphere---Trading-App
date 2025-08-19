@@ -20,9 +20,9 @@ export class Chart {
   @Input() stock: IStock | null = null;
 
   series: ApexAxisChartSeries = [];
-  chartOptions: Partial<ApexChart> = {
-    type: 'line',
-    height: 350,
+  chartOptions: ApexChart = {
+    type: 'candlestick',
+    height: 350
   };
   xaxis: ApexXAxis = {};
   title: ApexTitleSubtitle = {};
@@ -40,12 +40,21 @@ export class Chart {
     this.series = [
       {
         name: stock.symbol,
-        data: history.map((entry) => +entry.close),
+        data: history.map((entry) => ({
+          x: entry.datetime,
+          y: [
+            +entry.open,
+            +entry.high,
+            +entry.low,
+            +entry.close
+          ]
+        })),
       },
     ];
 
+
     this.xaxis = {
-      categories: history.map((entry) => entry.datetime), // or time
+      categories: history.map((entry) => entry.datetime),
     };
 
     this.title = {

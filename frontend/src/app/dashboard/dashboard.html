@@ -6,6 +6,8 @@
         <div class="watchlist h-50">
             <app-watchlist-overview (selectedStock)="onStockSelection($event)" />
         </div>
-        <div class="extra bg-primary h-50 flex-fill"></div>
+        <div class="h-50 flex-fill">
+            <app-purchase-widget [stock]="selectedStock" />
+        </div>
     </div>
 </div>
