@@ -5,7 +5,9 @@ import {
   ApexChart,
   ApexXAxis,
   ApexYAxis,
+  ApexStroke,
   ApexAnnotations,
+  ApexTitleSubtitle,
   NgApexchartsModule
 } from 'ng-apexcharts';
 
@@ -23,6 +25,8 @@ export class RsiChart {
   yaxis: ApexYAxis = {};
   annotations: ApexAnnotations = {};
   colors: string[] = [];
+  stroke: ApexStroke = { width: 2 }
+  title: ApexTitleSubtitle = { text: 'Relative Strength Index' }
 
   ngOnChanges() {
     if (this.stock) {

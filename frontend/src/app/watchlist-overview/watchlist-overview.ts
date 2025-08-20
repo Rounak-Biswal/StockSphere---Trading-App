@@ -25,7 +25,6 @@ export class WatchlistOverview implements OnInit {
     this.http.get("http://localhost:5000/watchlist/all")
       .subscribe((res: any) => {
         this.watchlistData = res;
-        console.log(this.watchlistData)
       })
   }
 

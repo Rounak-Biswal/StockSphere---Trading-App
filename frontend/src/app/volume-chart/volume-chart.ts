@@ -21,8 +21,9 @@ export class VolumeChart {
   @Input() stock: IStock | null = null;
   volumeSeries: ApexAxisChartSeries = [];
   xaxis: ApexXAxis = {};
-  title: ApexTitleSubtitle = {};
+  title: ApexTitleSubtitle = { text: 'Supply & Demand' };
   dataLabels: ApexDataLabels = { enabled: false };
+  colors: string[] = [];
 
   ngOnChanges() {
     if (this.stock) {
@@ -43,9 +44,11 @@ export class VolumeChart {
 
     this.xaxis = {
       categories: history.map((entry) => entry.datetime),
-      labels:{
+      labels: {
         show: false
       }
     };
+
+    this.colors = ['var(--electric-violet)']
   }
 }
