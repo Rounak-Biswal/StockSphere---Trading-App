@@ -4,10 +4,11 @@ import { Sidebar } from "./sidebar/sidebar";
 import { Dashboard } from './dashboard/dashboard';
 import { Profile } from './profile/profile';
 import { Trades } from './trades/trades';
+import { Topbar } from './topbar/topbar';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Sidebar, Dashboard, Profile, Trades],
+  imports: [RouterOutlet, Sidebar, Dashboard, Profile, Trades, Topbar],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

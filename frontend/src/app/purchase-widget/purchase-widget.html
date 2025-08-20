@@ -3,7 +3,7 @@
 
     @if(stock){
     <!-- Stock Info -->
-    <div class="d-flex align-items-center gap-3 mb-3">
+    <div class="d-flex align-items-center gap-2 mb-2">
         <img [src]="stock.logoURL" width="36" height="36" style="border-radius: 50%;" />
         <div>
             <h6 class="mb-0 fw-bold">{{ stock.symbol }}</h6>
@@ -12,7 +12,7 @@
     </div>
 
     <!-- Info Grid -->
-    <div class="mb-3">
+    <div class="mb-2">
         <div class="row text-center">
 
             <!-- Current Price -->
@@ -25,20 +25,20 @@
 
             <!-- Trend -->
             <div class="col-6">
-                <h6 class="text-muted mb-1">&nbsp;</h6>
+                <h6 class="mb-1" style="color: var(--silver-secondary);">Trend</h6>
                 <h4 [ngClass]="stock.trend > 0 ? 'text-success' : 'text-danger'">
                     {{ formatNumber(+stock.trend) }}%
                 </h4>
             </div>
 
             <!-- Available Balance label -->
-            <div class="col-6 mt-3">
+            <div class="col-6 mt-1">
                 <h6 class="mb-1" style="color: var(--silver-secondary);">Available Balance</h6>
             </div>
 
             <!-- Available Balance amount -->
-            <div class="col-6 mt-3">
-                <h4 class="fw-bold">$ 0.00</h4> <!-- replace with actual balance when available -->
+            <div class="col-6 mt-1">
+                <h4 class="fw-bold">$ 0.00</h4>
             </div>
 
         </div>
@@ -46,8 +46,8 @@
 
 
     <!-- Buy Action -->
-    <div class="mb-3">
-        <button class="btn rounded-3 w-100 mt-3 fw-bold" style="background-color: var(--green-secondary) !important;">
+    <div class="mb-2">
+        <button class="btn rounded-3 w-100 mt-1 fw-bold" style="background-color: var(--green-secondary) !important;">
             Buy {{ stock.symbol }}
         </button>
     </div>
@@ -63,5 +63,3 @@
     </div>
     }
 </div>
-
-<span></span>

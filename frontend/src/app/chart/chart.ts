@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { IStock } from '../../model/stock.model';
+import moment from 'moment';
 import {
   ApexAxisChartSeries,
   ApexChart,
@@ -53,11 +54,6 @@ export class Chart {
         })),
       },
     ];
-
-
-    this.xaxis = {
-      categories: history.map((entry) => entry.datetime),
-    };
 
     this.yaxis = {
       labels: { formatter: (v: number) => v.toFixed(0) } // no decimals

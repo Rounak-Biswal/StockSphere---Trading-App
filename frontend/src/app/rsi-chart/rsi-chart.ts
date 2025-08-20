@@ -26,7 +26,7 @@ export class RsiChart {
   annotations: ApexAnnotations = {};
   colors: string[] = [];
   stroke: ApexStroke = { width: 2 }
-  title: ApexTitleSubtitle = { text: 'Relative Strength Index' }
+  title: ApexTitleSubtitle = { text: 'RSI' }
 
   ngOnChanges() {
     if (this.stock) {

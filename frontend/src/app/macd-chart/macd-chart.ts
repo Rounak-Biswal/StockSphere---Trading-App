@@ -24,7 +24,7 @@ export class MacdChart {
   yaxis: ApexYAxis = {};
   chart: ApexChart = { type: 'line', height: 300 };
   stroke: ApexStroke = { width: 2 };
-  title: ApexTitleSubtitle = { text: 'Accumulation / Distribution' };
+  title: ApexTitleSubtitle = { text: 'A/D' };
   colors: string[] = [];
 
   ngOnChanges() {
