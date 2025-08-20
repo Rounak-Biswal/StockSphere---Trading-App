@@ -5,10 +5,13 @@ import { CommonModule } from '@angular/common';
 import { WatchlistOverview } from '../watchlist-overview/watchlist-overview';
 import { Chart } from '../chart/chart';
 import { PurchaseWidget } from '../purchase-widget/purchase-widget';
+import { VolumeChart } from '../volume-chart/volume-chart';
+import { RsiChart } from '../rsi-chart/rsi-chart';
+import { MacdChart } from '../macd-chart/macd-chart';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [HttpClientModule, CommonModule, WatchlistOverview, Chart, PurchaseWidget],
+  imports: [HttpClientModule, CommonModule, WatchlistOverview, Chart, PurchaseWidget, VolumeChart, RsiChart, MacdChart],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css'
 })

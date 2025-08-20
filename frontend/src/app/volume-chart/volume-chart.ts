@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { IStock } from '../../model/stock.model';
 import {
   ApexAxisChartSeries,
@@ -6,48 +6,46 @@ import {
   ApexXAxis,
   ApexTitleSubtitle,
   ApexTooltip,
+  ApexDataLabels,
   NgApexchartsModule
 } from 'ng-apexcharts';
 
 @Component({
   selector: 'app-volume-chart',
-  imports: [],
+  imports: [NgApexchartsModule],
   templateUrl: './volume-chart.html',
   styleUrl: './volume-chart.css'
 })
 export class VolumeChart {
+
+  @Input() stock: IStock | null = null;
   volumeSeries: ApexAxisChartSeries = [];
   xaxis: ApexXAxis = {};
   title: ApexTitleSubtitle = {};
+  dataLabels: ApexDataLabels = { enabled: false };
+
+  ngOnChanges() {
+    if (this.stock) {
+      this.updateChartData(this.stock);
+    }
+  }
 
   updateChartData(stock: IStock) {
     const history = stock.history.slice().reverse();
 
-    // Price series (candlestick or line)
-    this.volumeSeries = [
-      {
-        name: stock.symbol,
-        data: history.map((entry) => +entry.close),
-      },
-    ];
-
-    // Volume series (separate)
+    // Only keep volume data (no need for close prices here)
     this.volumeSeries = [
       {
         name: 'Volume',
-        type: 'bar',
         data: history.map((entry) => +entry.volume),
       },
     ];
 
     this.xaxis = {
       categories: history.map((entry) => entry.datetime),
-    };
-
-    this.title = {
-      text: `${stock.symbol} Price & Volume`,
-      align: 'left',
+      labels:{
+        show: false
+      }
     };
   }
-
 }
