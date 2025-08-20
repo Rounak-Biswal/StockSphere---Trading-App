@@ -4,6 +4,7 @@ import {
   ApexAxisChartSeries,
   ApexChart,
   ApexXAxis,
+  ApexYAxis,
   ApexTitleSubtitle,
   ApexTooltip,
   NgApexchartsModule
@@ -25,6 +26,7 @@ export class Chart {
     height: 350
   };
   xaxis: ApexXAxis = {};
+  yaxis: ApexYAxis = {};
   title: ApexTitleSubtitle = {};
   tooltip: ApexTooltip = {};
 
@@ -55,6 +57,10 @@ export class Chart {
 
     this.xaxis = {
       categories: history.map((entry) => entry.datetime),
+    };
+
+    this.yaxis = {
+      labels: { formatter: (v: number) => v.toFixed(0) } // no decimals
     };
 
     this.title = {

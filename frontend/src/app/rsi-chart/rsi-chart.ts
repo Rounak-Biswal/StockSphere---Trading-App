@@ -22,6 +22,7 @@ export class RsiChart {
   xaxis: ApexXAxis = {};
   yaxis: ApexYAxis = {};
   annotations: ApexAnnotations = {};
+  colors: string[] = [];
 
   ngOnChanges() {
     if (this.stock) {
@@ -70,6 +71,8 @@ export class RsiChart {
         }
       ]
     };
+
+    this.colors = ['#FFD700']
   }
 
   private calculateRSI(closes: number[], period: number): number[] {

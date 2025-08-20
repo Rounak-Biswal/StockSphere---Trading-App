@@ -25,6 +25,7 @@ export class MacdChart {
   chart: ApexChart = { type: 'line', height: 300 };
   stroke: ApexStroke = { curve: 'smooth', width: 2 };
   title: ApexTitleSubtitle = { text: 'Accumulation / Distribution Line' };
+  colors: string[] = [];
 
   ngOnChanges() {
     if (this.stock) {
@@ -72,5 +73,6 @@ export class MacdChart {
         formatter: (val: number) => val.toFixed(0)  // ⬅️ no decimals
       }
     };
+    this.colors = ['#00FA9A']
   }
 }
