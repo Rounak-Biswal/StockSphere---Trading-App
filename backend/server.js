@@ -5,6 +5,7 @@ const mongoose = require("mongoose")
 const port = 5000
 const cors = require("cors")
 const { Stock, Watchlist } = require("./model/stock")
+const User = require("./model/user")
 
 app.use(express.json())
 app.use(cors())
@@ -25,7 +26,6 @@ async function main() {
 main();
 
 //real routes
-//get all stock data
 app.get("/stock/all", async (req, res) => {
     try {
         const stockData = await Stock.find()
@@ -66,6 +66,41 @@ app.delete("/watchlist/:symbol", async (req, res) => {
         console.log("stock removed from watchlist")
     } catch (e) {
         console.log("Something's wrong : ", e)
+    }
+})
+
+//auth section
+app.post("/register", async (req, res) => {
+    let { username, email, password } = req.body
+    const existingUser = await User.findOne({ username })
+    if (existingUser) {
+        console.log("User already exists")
+    }
+    else {
+        try {
+            const newUser = new User({ username, email, password })
+            await newUser.save()
+            console.log("User successfully registered : ", newUser)
+        } catch (err) {
+            console.log("Registration failed : ", err)
+            return res.json({ msg: err })
+        }
+    }
+})
+
+app.post("/login", async (req, res) => {
+    let { email, password } = req.body
+    const existingUser = await User.findOne({ email })
+    if(!existingUser){
+        console.log("User doesn't exist, signup instead")
+    }
+    else{
+        if(password === existingUser.password){
+            console.log("Successful login !!!")
+        }
+        else{
+            console.log("Wrong Password !!!")
+        }
     }
 })
 

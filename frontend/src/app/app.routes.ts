@@ -4,6 +4,8 @@ import { Trades } from './trades/trades';
 import { Profile } from './profile/profile';
 import { Settings } from './settings/settings';
 import { Home } from './home/home';
+import { Register } from './register/register';
+import { Login } from './login/login';
 
 export const routes: Routes = [
     {
@@ -25,5 +27,14 @@ export const routes: Routes = [
     }, {
         path: "settings",
         component: Settings
+    }, {
+        path: "settings",
+        component: Settings
+    }, {
+        path: "register",
+        component: Register
+    }, {
+        path: "login",
+        component: Login
     }
 ];
