@@ -82,8 +82,7 @@ app.post("/register", async (req, res) => {
         }
         const token = generateToken(payload)
 
-        console.log("User successfully registered : ", newUser)
-        res.status(200).json({ response: savedData, token: token, payload: payload })
+        res.status(200).json({ msg: "Registeration successful", response: savedData, token: token, payload: payload })
     } catch (error) {
         console.log(error)
         res.status(500).json({ error: "Internal server error" })
@@ -104,7 +103,7 @@ app.post("/login", async (req, res) => {
         }
         const token = generateToken(payload)
 
-        res.json({ token: token })
+        res.json({ msg: "Login successful", response: existingUser, token: token })
     } catch (error) {
         res.status(401).json({ error: "Invalid server error" })
     }

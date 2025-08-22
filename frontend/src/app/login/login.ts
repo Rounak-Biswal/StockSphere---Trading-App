@@ -21,7 +21,7 @@ export class Login implements OnInit {
 
   onLogin() {
     this.http.post("http://localhost:5000/login", this.loginData).subscribe((res:any) => {
-      console.log("User successfully logged in")
+      console.log(res)
     })
   }
 

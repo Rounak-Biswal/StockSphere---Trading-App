@@ -3,7 +3,7 @@ import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-topbar',
-  imports: [RouterLink],
+  imports: [],
   templateUrl: './topbar.html',
   styleUrl: './topbar.css'
 })
