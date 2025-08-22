@@ -14,7 +14,7 @@ export class Login implements OnInit {
   http = inject(HttpClient)
 
   loginData: ILogin = {
-    email: "",
+    username: "",
     password: ""
   }
 

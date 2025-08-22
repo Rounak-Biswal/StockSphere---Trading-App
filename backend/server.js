@@ -6,7 +6,7 @@ const port = 5000
 const cors = require("cors")
 const { Stock, Watchlist } = require("./model/stock")
 const User = require("./model/user")
-
+const { jwtAuthMiddleware, generateToken } = require("./auth")
 app.use(express.json())
 app.use(cors())
 
@@ -72,35 +72,52 @@ app.delete("/watchlist/:symbol", async (req, res) => {
 //auth section
 app.post("/register", async (req, res) => {
     let { username, email, password } = req.body
-    const existingUser = await User.findOne({ username })
-    if (existingUser) {
-        console.log("User already exists")
-    }
-    else {
-        try {
-            const newUser = new User({ username, email, password })
-            await newUser.save()
-            console.log("User successfully registered : ", newUser)
-        } catch (err) {
-            console.log("Registration failed : ", err)
-            return res.json({ msg: err })
+    try {
+        const newUser = new User({ username, email, password })
+        const savedData = await newUser.save()
+
+        const payload = {
+            id: savedData.id,
+            username: savedData.username
         }
+        const token = generateToken(payload)
+
+        console.log("User successfully registered : ", newUser)
+        res.status(200).json({ response: savedData, token: token, payload: payload })
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ error: "Internal server error" })
     }
 })
 
 app.post("/login", async (req, res) => {
-    let { email, password } = req.body
-    const existingUser = await User.findOne({ email })
-    if(!existingUser){
-        console.log("User doesn't exist, signup instead")
+    try {
+        const { username, password } = req.body
+        const existingUser = await User.findOne({ username })
+        if (!existingUser || existingUser.password !== password) {
+            return res.status(401).json({ error: "Invalid username or password" })
+        }
+
+        const payload = {
+            id: existingUser.id,
+            username: existingUser.username
+        }
+        const token = generateToken(payload)
+
+        res.json({ token: token })
+    } catch (error) {
+        res.status(401).json({ error: "Invalid server error" })
     }
-    else{
-        if(password === existingUser.password){
-            console.log("Successful login !!!")
-        }
-        else{
-            console.log("Wrong Password !!!")
-        }
+})
+
+//testing routes
+app.get("/profile", jwtAuthMiddleware, async (req, res) => {
+    try {
+        const userId = req.userPayload.id
+        const currUser = await User.findById(userId)
+        res.status(200).json({ currentUser: currUser })
+    } catch (error) {
+        res.status(401).json({ error: "Internal server error" })
     }
 })
 
