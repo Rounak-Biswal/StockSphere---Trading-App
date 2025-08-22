@@ -8,7 +8,7 @@ import { Topbar } from './topbar/topbar';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Sidebar],
+  imports: [RouterOutlet, Sidebar, Topbar],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

@@ -1,0 +1,8 @@
+.auth-btn{
+    border: none;
+    border-radius: 2rem;
+    padding: 0.25rem 1rem;
+    margin-bottom: 1rem;
+    color: var(--black-primary);
+    background-color: var(--gold-primary);
+}

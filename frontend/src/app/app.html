@@ -1,9 +1,16 @@
 <div class="d-flex vh-100 py-4 pe-4" style="background-color: var(--grey-primary); color: var(--silver-primary);">
 
-  <app-sidebar class="" style="width: 50px; background-color: var(--grey-primary); color: var(--white-primary)"></app-sidebar>
+  <app-sidebar class=""
+    style="width: 50px; background-color: var(--grey-primary); color: var(--white-primary)"></app-sidebar>
 
-  <div class="flex-grow-1 p-3 rounded-4" style="background-color: var(--black-primary);">
-    <router-outlet></router-outlet>
+  <div class="d-flex flex-column flex-grow-1">
+
+    <!-- <app-topbar></app-topbar> -->
+
+    <div class="main-content flex-grow-1 p-3 rounded-4" style="background-color: var(--black-primary);">
+      <router-outlet></router-outlet>
+    </div>
+
   </div>
 
 </div>

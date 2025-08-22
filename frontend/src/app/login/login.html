@@ -1,13 +1,64 @@
-<form (ngSubmit)="onLogin()">
-  <h2>Log In</h2>
-  <div class="form-group">
-    <label for="username">Username</label>
-    <input type="text" id="username" [(ngModel)]="loginData.username" name="username" required>
+<div class="login-page-container d-flex justify-content-center align-items-center h-100">
+  <div class="login-card p-5 rounded-3 shadow-lg"
+    style="max-width: 420px; width: 100%; background: var(--grey-primary);">
+
+    <!-- Header -->
+    <div class="text-center mb-4">
+      <h2 class="text-white fw-semibold mb-2">Sign in to Continue</h2>
+      <p class="mb-0" style="color: var(--silver-secondary);">Don't have an account ?
+        <span routerLink="register">
+          <a routerLink="/register" style="color: var(--gold-primary);">Register</a>&nbsp;here
+        </span>
+      </p>
+    </div>
+
+    <!-- Social Login Buttons -->
+    <div class="row g-2 mb-4">
+      <div class="col-6">
+        <button type="button" class="btn w-100 py-1 d-flex align-items-center justify-content-center gap-2"
+          style="background: rgba(60, 60, 60, 0.8); border: 1px solid rgba(255, 255, 255, 0.15); color: white;">
+          <i class="fab fa-google"></i>
+          <span>Google</span>
+        </button>
+      </div>
+      <div class="col-6">
+        <button type="button" class="btn w-100 py-1 d-flex align-items-center justify-content-center gap-2"
+          style="background: rgba(60, 60, 60, 0.8); border: 1px solid rgba(255, 255, 255, 0.15); color: white;">
+          <i class="fab fa-facebook-f"></i>
+          <span>Facebook</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <div class="text-center position-relative mb-4">
+      <hr style="border-color: var(--silver-secondary);">
+      <span class="position-absolute top-50 start-50 translate-middle px-3"
+        style="background: var(--grey-primary); color: var(--silver-primary);">or</span>
+    </div>
+
+    <!-- Login Form -->
+    <form class="login-form">
+      <div class="mb-4">
+        <label for="username" class="form-label" style="color: var(--silver-secondary);">Username</label>
+        <input type="text" class="form-control py-2 text-white border-0" id="username"
+          style="background: var(--gray-700); border-radius: 8px;" required>
+      </div>
+
+      <div class="mb-4">
+        <label for="password" class="form-label" style="color: var(--silver-secondary);">Password</label>
+        <input type="password" class="form-control py-2 text-white border-0" id="password"
+          style="background: var(--gray-700); border-radius: 8px;" required>
+      </div>
+
+      <div class="mb-4">
+        <button type="submit"
+          class="btn btn-lg w-100 py-2 text-white d-flex align-items-center justify-content-center gap-2"
+          style="background: var(--orange-primary); border: none; border-radius: 8px;">
+          <span>Continue</span>
+        </button>
+      </div>
+    </form>
+
   </div>
-  <div class="form-group">
-    <label for="password">Password</label>
-    <input type="password" id="password" [(ngModel)]="loginData.password" name="password" required>
-  </div>
-  <button type="submit">Login</button>
-  <p>Don't have an account? <a routerLink="/login">Sign Up</a></p>
-</form>
+</div>
