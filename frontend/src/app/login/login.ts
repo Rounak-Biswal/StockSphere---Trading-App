@@ -20,12 +20,13 @@ export class Login implements OnInit {
   }
 
   onLogin() {
-    this.http.post("http://localhost:5000/login", this.loginData).subscribe((res:any) => {
+    this.http.post("http://localhost:5000/login", this.loginData).subscribe((res: any) => {
+      localStorage.setItem('token', res.token);
       console.log(res)
     })
   }
 
   ngOnInit(): void {
-    
+
   }
 }

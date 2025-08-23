@@ -23,6 +23,7 @@ export class Register implements OnInit {
   onSignup() {
     this.http.post("http://localhost:5000/register", this.signupData).subscribe(
       (res: any) => {
+        localStorage.setItem('token', res.token);
         console.log(res)
       })
   }
