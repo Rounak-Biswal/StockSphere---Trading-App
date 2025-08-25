@@ -5,6 +5,7 @@
         --white-primary: #ffffff;
         --gold-primary: #ff8802;
         --orange-primary: #f75422;
+        --orange-secondary: #f5350f;
         --silver-primary: #acacb0;
         --silver-secondary: #78787b;
         --blue-primary: #35b3cb;
@@ -75,10 +76,20 @@ th {
         color: var(--silver-primary) !important;
 }
 
-.main-content{
+.main-content {
         overflow-y: hidden;
 }
 
-a{
+a {
         text-decoration: none;
+}
+
+.authBtn {
+        background: var(--orange-primary);
+        border: none;
+        border-radius: 8px;
+}
+
+.authBtn:hover {
+        background-color: var(--orange-secondary);
 }
