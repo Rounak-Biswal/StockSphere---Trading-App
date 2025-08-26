@@ -6,6 +6,7 @@ import { Settings } from './settings/settings';
 import { Home } from './home/home';
 import { Register } from './register/register';
 import { Login } from './login/login';
+import { authGuardGuard } from './auth-guard-guard';
 
 export const routes: Routes = [
     {
@@ -14,22 +15,24 @@ export const routes: Routes = [
         pathMatch: "full"
     }, {
         path: "home",
-        component: Home
+        component: Home,
+        canActivate: [authGuardGuard]
     }, {
         path: "dashboard",
-        component: Dashboard
+        component: Dashboard,
+        canActivate: [authGuardGuard]
     }, {
         path: "trades",
-        component: Trades
+        component: Trades,
+        canActivate: [authGuardGuard]
     }, {
         path: "profile",
-        component: Profile
+        component: Profile,
+        canActivate: [authGuardGuard]
     }, {
         path: "settings",
-        component: Settings
-    }, {
-        path: "settings",
-        component: Settings
+        component: Settings,
+        canActivate: [authGuardGuard]
     }, {
         path: "register",
         component: Register

@@ -1,45 +1,11 @@
-<!-- <div class="d-flex flex-column align-items-center pt-5 pb-3" style="height: 100%;">
-
-  <div class="d-flex flex-column align-items-center justify-content-center">
-    <a routerLink="home" class="mb-4" style="text-decoration: none; color: var(--white-primary); cursor: pointer;">
-      <i class="fa-solid fa-house-chimney fa-lg"></i>
-    </a>
-    <a routerLink="dashboard" class="mb-4" style="text-decoration: none; color: var(--white-primary); cursor: pointer;">
-      <i class="fa-solid fa-chart-simple fa-lg"></i>
-    </a>
-    <a routerLink="trades" class="mb-4" style="text-decoration: none; color: var(--white-primary); cursor: pointer;">
-      <i class="fa-solid fa-chart-line fa-lg"></i>
-    </a>
-    <a routerLink="settings" class="mb-4" style="text-decoration: none; color: var(--white-primary); cursor: pointer;">
-      <i class="fa-solid fa-gear fa-lg"></i>
-    </a>
-  </div>
-
-  <div class="mt-auto d-flex flex-column" onchange="checkLoginStatus()">
-    @if(isLoggedIn){
-    <a routerLink="logout" class="mb-4" style="text-decoration: none; color: var(--white-primary); cursor: pointer;">
-      <i class="fa-solid fa-power-off"></i>
-    </a>
-    }
-    else{
-    <a routerLink="login" class="mb-4" style="text-decoration: none; color: var(--white-primary); cursor: pointer;">
-      <i class="fa-solid fa-right-to-bracket"></i>
-    </a>
-    }
-    <a routerLink="profile" class="mb-4" style="text-decoration: none; color: var(--white-primary); cursor: pointer;">
-      <i class="fa-solid fa-user fa-lg"></i>
-    </a>
-  </div>
-</div> -->
-
-
 <div class="d-flex flex-column align-items-center pt-5 pb-3" style="height: 100%;">
 
   <div class="d-flex flex-column align-items-center justify-content-center">
     <a routerLink="/home" class="mb-4" style="text-decoration: none; color: var(--white-primary); cursor: pointer;">
       <i class="fa-solid fa-house-chimney fa-lg"></i>
     </a>
-    <a routerLink="/dashboard" class="mb-4" style="text-decoration: none; color: var(--white-primary); cursor: pointer;">
+    <a routerLink="/dashboard" class="mb-4"
+      style="text-decoration: none; color: var(--white-primary); cursor: pointer;">
       <i class="fa-solid fa-chart-simple fa-lg"></i>
     </a>
     <a routerLink="/trades" class="mb-4" style="text-decoration: none; color: var(--white-primary); cursor: pointer;">
@@ -50,18 +16,18 @@
     </a>
   </div>
 
-  <div class="mt-auto d-flex flex-column">
+  <div class="mt-auto d-flex flex-column align-items-center justify-content-center">
     @if (isLoggedIn) {
-      <a (click)="onLogout()" class="mb-4" style="text-decoration: none; color: var(--white-primary); cursor: pointer;">
-        <i class="fa-solid fa-power-off"></i>
-      </a>
-      <a routerLink="/profile" class="mb-4" style="text-decoration: none; color: var(--white-primary); cursor: pointer;">
-        <i class="fa-solid fa-user fa-lg"></i>
-      </a>
+    <a (click)="onLogout()" class="mb-4" style="text-decoration: none; color: var(--white-primary); cursor: pointer;">
+      <i class="fa-solid fa-power-off"></i>
+    </a>
+    <a routerLink="/profile" class="mb-4" style="text-decoration: none; color: var(--white-primary); cursor: pointer;">
+      <i class="fa-solid fa-user fa-lg"></i>
+    </a>
     } @else {
-      <a routerLink="/login" class="mb-4" style="text-decoration: none; color: var(--white-primary); cursor: pointer;">
-        <i class="fa-solid fa-right-to-bracket"></i>
-      </a>
+    <a routerLink="/login" class="mb-4" style="text-decoration: none; color: var(--white-primary); cursor: pointer;">
+      <i class="fa-solid fa-right-to-bracket"></i>
+    </a>
     }
   </div>
 </div>

@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { AuthService } from '../auth';
+import { Component, inject, OnInit } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -10,18 +9,15 @@ import { AuthService } from '../auth';
 })
 export class Sidebar implements OnInit {
   isLoggedIn: boolean = false;
-
-  constructor(private authService: AuthService) { }
+  route = inject(Router)
 
   ngOnInit(): void {
-    // Subscribe to the status. This will automatically update isLoggedIn.
-    this.authService.isLoggedIn$.subscribe(status => {
-      this.isLoggedIn = status;
-    });
+    this.isLoggedIn = !!localStorage.getItem('token');
   }
 
   onLogout() {
-    // Call the service's logout method
-    this.authService.logout();
+    localStorage.setItem('token', "")
+    this.isLoggedIn = false
+    this.route.navigateByUrl('/login')
   }
 }
