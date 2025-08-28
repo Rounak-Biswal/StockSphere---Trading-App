@@ -1,5 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
+import { Auth } from '../services/auth/auth';
 
 @Component({
   selector: 'app-sidebar',
@@ -10,14 +11,18 @@ import { Router, RouterLink } from '@angular/router';
 export class Sidebar implements OnInit {
   isLoggedIn: boolean = false;
   route = inject(Router)
+  auth = inject(Auth)
 
   ngOnInit(): void {
-    this.isLoggedIn = !!localStorage.getItem('token');
+    this.auth.isLoggedIn$.subscribe(status => {
+      this.isLoggedIn = status
+    })
   }
 
   onLogout() {
-    localStorage.setItem('token', "")
-    this.isLoggedIn = false
+    // localStorage.setItem('token', "")
+    // this.isLoggedIn = false
+    this.auth.logout()
     this.route.navigateByUrl('/login')
   }
 }

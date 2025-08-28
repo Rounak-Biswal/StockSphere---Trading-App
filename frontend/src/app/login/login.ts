@@ -4,6 +4,7 @@ import { ILogin } from '../../model/user.model';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
+import { Auth } from '../services/auth/auth';
 
 @Component({
   selector: 'app-login',
@@ -14,6 +15,7 @@ import { Router, RouterLink } from '@angular/router';
 export class Login implements OnInit {
   http = inject(HttpClient)
   route = inject(Router)
+  auth = inject(Auth)
 
   loginData: ILogin = {
     username: "",
@@ -22,7 +24,8 @@ export class Login implements OnInit {
 
   onLogin() {
     this.http.post("http://localhost:5000/login", this.loginData).subscribe((res: any) => {
-      localStorage.setItem('token', res.token);
+      // localStorage.setItem('token', res.token);
+      this.auth.login(res.token)
       console.log(res)
       this.route.navigateByUrl('/home')
     })
