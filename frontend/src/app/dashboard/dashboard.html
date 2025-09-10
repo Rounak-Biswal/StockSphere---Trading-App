@@ -1,7 +1,10 @@
-<div class="container-fluid d-flex gap-5 h-100 w-100 px-0" style="max-height: 100vh;">
+<div class="d-flex" style="height: 100%; max-height: 100vh; overflow-x: auto; overflow-y: auto;">
     <div class="chart w-75 h-100 d-flex flex-column gap-3">
         <div class="h-50">
+            @if(selectedStock){
             <app-chart [stock]="selectedStock" />
+            }
+
         </div>
         <div class="h-50 d-flex gap-1">
             <div class="flex-fill">

@@ -29,7 +29,10 @@ export class Dashboard implements OnInit {
     this.http.get("http://localhost:5000/watchlist/all")
       .subscribe((res: any) => {
         this.watchlistData = res;
-        console.log(this.watchlistData)
+        // console.log(this.watchlistData)
+        if (this.watchlistData.length > 0) {
+          this.onStockSelection(this.watchlistData[0])
+        }
       })
   }
 
