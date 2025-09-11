@@ -19,7 +19,6 @@ async function main() {
     try {
         await mongoose.connect(process.env.MONGO_URL);
         console.log("DB connection successful");
-        qrystr = {}
     } catch (e) {
         console.log("DB connection failed !! Retry");
     }

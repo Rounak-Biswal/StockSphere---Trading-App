@@ -16,7 +16,6 @@ export const routes: Routes = [
     }, {
         path: "home",
         component: Home,
-        canActivate: [authGuardGuard]
     }, {
         path: "dashboard",
         component: Dashboard,

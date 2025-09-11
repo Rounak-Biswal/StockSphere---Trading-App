@@ -3,7 +3,7 @@ import { IUser } from '../../model/user.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule, HttpErrorResponse } from '@angular/common/http';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -13,6 +13,7 @@ import { RouterLink } from '@angular/router';
 })
 export class Register implements OnInit {
   http = inject(HttpClient)
+  route = inject(Router)
 
   signupData: IUser = {
     username: "",
@@ -25,6 +26,7 @@ export class Register implements OnInit {
       (res: any) => {
         localStorage.setItem('token', res.token);
         console.log(res)
+        this.route.navigateByUrl('/home')
       })
   }
 
